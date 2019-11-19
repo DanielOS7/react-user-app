@@ -24,8 +24,6 @@ app.get("/getUsers", function (request, response) {
       response.send(data);
     
     }
-    
-    
 
 });
   
