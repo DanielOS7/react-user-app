@@ -11,7 +11,7 @@ app.use(cookieparser());
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded(({ extended: true })));
 
-app.get("/", function (request, response) {
+app.get("/getUsers", function (request, response) {
   
   var sqlquery = `select * from users`;
 
