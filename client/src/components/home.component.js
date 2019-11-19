@@ -8,9 +8,9 @@ export default class Home extends React.Component {
         return (
             <div className="page-links">
                 <a href="http://www.google.com">Home Page</a>
-                <div className="horizontal-row">
+                <center><div style={{maxWidth: "40vw"}}>
                 <hr/>
-                </div>
+                </div></center>
                 <a href="http://www.google.com">Login Page</a>
             </div>
         );
