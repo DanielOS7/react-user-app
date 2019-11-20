@@ -14,27 +14,35 @@ export default class Login extends React.Component {
             password: '',
             name:'',
             role: 0
-
         };
+
+        // this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit = (e) => {
+     onSubmit = (e) =>{
         e.preventDefault();
         console.log('Was this called');
 
         this.setState({
             username: e.target.formUsername.value,
             password: e.target.formPassword.value
-        }, () => {
+        }, async () => {
 
             let data = {
                 "username": this.state.username,
                 "password": this.state.password
             }
 
-            console.log(JSON.stringify(data) + "attempted to be checked")
+            console.log(JSON.stringify(data) + " Attempted to be checked")
+
+         
+                // const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`);
+                // const json = await response.json();
+                // this.setState({ data: json });
+              
+            
     
-             fetch(`http://localhost:2700/login`,{
+             const response = await fetch(`http://localhost:2700/login`,{
                 method:'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -42,17 +50,34 @@ export default class Login extends React.Component {
                 body: JSON.stringify(data)
     
             })
-            .then(response => {
-                // response.json()
-                console.log( response.json());
+            // .then(response => {
 
-                if (response.status === 200) {
-                   console.log('Success');
-                //    window.location.replace(`http://localhost:3000/employee`);
-                } else {
-                    alert('Login Failed');
-                };
-            } )
+            //     if (response.status === 200) {
+            //        console.log('Success');
+            //     //    window.location.replace(`http://localhost:3000/employee`);
+            //     } else {
+            //         alert('Login Failed');
+            //     };
+            // } )
+
+            
+
+
+            const responseData =  await response.json();
+            const responseStatus = await response.status;
+
+            console.log (responseData);
+            console.log(responseStatus);
+
+            // console.log(localStorage.getItem(name));
+
+            // console.log(localStorage.getItem('name'));
+
+
+            // setTimeout(() => {
+            //     console.log(localStorage.getItem('name'));
+            //   }, 3000);
+
         });
 
          e.target.formUsername.value = "";
