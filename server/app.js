@@ -6,7 +6,7 @@ var con = mySql();
 var bodyparser = require("body-parser");
 var session = require("express-session");
 
-app.use(session({}));
+app.use(session({secret:"shh, secret!"}));
 app.use(cookieparser());
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded(({ extended: true })));
