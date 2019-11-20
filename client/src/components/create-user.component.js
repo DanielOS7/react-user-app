@@ -4,9 +4,55 @@ import Button from 'react-bootstrap/Button';
 
 export default class CreateUser extends React.Component {
 
-    onSubmit(e){
+    constructor(){
+        super();
+
+        this.state = {
+            username:"",
+            password: "",
+            name:"",
+            role: 0
+
+        };
+    }
+
+    onSubmit = (e) => {
         e.preventDefault();
         console.log('Was this called');
+
+        this.setState({
+            username: e.target.formUsername.value,
+            password: e.target.formPassword.value,
+            name:e.target.formName.value,
+            role: e.target.formRole.value 
+        }, () => {
+
+            let data = {
+                "username": this.state.username,
+                "password": this.state.password,
+                "name": this.state.name,
+                "role": this.state.role
+            }
+
+            console.log(JSON.stringify(data) + "attempted to be created")
+    
+             fetch(`http://localhost:2700/addUser`,{
+                method:'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+    
+        })
+        });
+
+         e.target.formUsername.value = "";
+         e.target.formPassword.value = "";
+         e.target.formName.value = "";
+
+
+
     }
 
     getUsers() {
@@ -14,7 +60,6 @@ export default class CreateUser extends React.Component {
             .then(response => response.json())
             .then(data => console.log(data))
     }
-
 
     render() {
         return (
@@ -30,7 +75,7 @@ export default class CreateUser extends React.Component {
                         <Form.Control type="input" placeholder="Password" />
                     </Form.Group>
                     <Form.Group controlId="formName">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Name</Form.Label>
                         <Form.Control type="input" placeholder="Name" />
                     </Form.Group>
                     <Form.Group controlId="formRole">
@@ -44,7 +89,7 @@ export default class CreateUser extends React.Component {
                     <button className="btn btn-primary"  type="submit">
                         Submit
                     </button>
-                </Form>
+                </Form><br/>
                 <button onClick={this.getUsers}>Backend Connection Check</button>
             </div>
         );

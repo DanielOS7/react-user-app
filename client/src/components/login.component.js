@@ -19,6 +19,8 @@ export default class Login extends React.Component {
             .then(data => console.log(data))
     }
 
+    
+
 
 
 
@@ -37,7 +39,7 @@ export default class Login extends React.Component {
                     <button className="btn btn-primary" type="submit">
                         Submit
                     </button>
-                </Form>
+                </Form><br/>
                 <button onClick={this.getUsers}>Backend Connection Check</button>
             </div>
 
