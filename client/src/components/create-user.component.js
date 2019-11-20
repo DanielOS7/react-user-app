@@ -9,6 +9,13 @@ export default class CreateUser extends React.Component {
         console.log('Was this called');
     }
 
+    getUsers() {
+        fetch(`http://localhost:2700/getUsers`)
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }
+
+
     render() {
         return (
             <div>
@@ -38,6 +45,7 @@ export default class CreateUser extends React.Component {
                         Submit
                     </button>
                 </Form>
+                <button onClick={this.getUsers}>Backend Connection Check</button>
             </div>
         );
     }
