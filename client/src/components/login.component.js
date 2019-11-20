@@ -14,6 +14,20 @@ export default class Login extends React.Component {
 
     }
 
+    getUsers(){
+//         fetch(`http://localhost:2700/getUsers`) // Call the fetch function passing the url of the API as a parameter
+// .then(function(data) {
+//     console.log(data)
+//     // Your code for handling the data you get from the API
+
+
+// })
+
+fetch(`http://localhost:2700/getUsers`)
+  .then(response => response.json())
+  .then(data => console.log(data))
+    }
+
 
    
 
@@ -34,7 +48,9 @@ export default class Login extends React.Component {
                         Submit
                     </button>
                 </Form>
+                <button onClick={this.getUsers}></button>
             </div>
+
         );
     }
 }

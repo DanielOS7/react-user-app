@@ -5,11 +5,13 @@ var mySql = require('./dbConnection');
 var con = mySql();
 var bodyparser = require("body-parser");
 var session = require("express-session");
+var cors = require('cors');
 
 app.use(session({secret:"shh, secret!"}));
 app.use(cookieparser());
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded(({ extended: true })));
+app.use(cors());
 
 app.get("/getUsers", function (request, response) {
   
