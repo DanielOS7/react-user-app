@@ -10,9 +10,9 @@ export default class Login extends React.Component {
         super();
 
         this.state = {
-            username:"",
-            password: "",
-            name:"",
+            username:'',
+            password: '',
+            name:'',
             role: 0
 
         };
@@ -37,7 +37,6 @@ export default class Login extends React.Component {
              fetch(`http://localhost:2700/login`,{
                 method:'POST',
                 headers: {
-                  'Accept': 'application/json',
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
