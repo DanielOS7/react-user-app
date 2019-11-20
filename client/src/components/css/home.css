@@ -1,0 +1,16 @@
+.horizontal-row{
+    max-width: 40vw;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    left: 440px;
+    position: relative;
+}
+
+.page-links{
+    text-align: center;
+    margin: 10px;
+    position: relative;
+    top: 35vh;
+
+}
