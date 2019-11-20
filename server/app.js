@@ -53,12 +53,13 @@ app.post("/addUser", function (request, response) {
       console.log('Error adding a new user');
     }
     else {
-      console.log('New user added');
+      console.log('Added new user');
     }
   });
   response.end();
 });
 
+// Note tested as established this wasn't MVP for this project
 app.put("/updateUser", function (request, response) {
   console.log("Something");
 
@@ -148,24 +149,75 @@ app.get('/getEmployee', function(request, response, next) {
 
   });
 
+  app.post("/addEmployee", function (request, response) {
+    console.log("Something");
   
-app.get('/getEmployee', function(request, response, next) {
-   
-  var sqlquery = `select * from employee`;
-
-  con.query(sqlquery, function (error, data) {
-    if (error) {
-      console.log("Error executing query");
-    }
-    else {
-      console.log("Employee data retrieved");
-      response.send(data);
-
-    }
-
+    console.log(request.body)
+    
+    var name = request.body.name;
+    var address = request.body.address;
+  
+    var sqlquery = `insert into employee values(${null},'${name}', '${address}')`;
+    console.log(sqlquery);
+    con.query(sqlquery, function (error, data) {
+      if (error) {
+        console.log('Error adding a new Employee');
+      }
+      else {
+        console.log('Added new Employee');
+      }
+    });
+    response.end();
   });
 
+
+
+  app.delete('/deleteemployee', function (request, response) {
+    console.log('Something');
+  
+    console.log(request.body)
+    var empno = request.body.empno;
+  
+    var sqlquery = `DELETE FROM employee  WHERE empno =  ${empno}`;
+    // "DELETE FROM `employee` WHERE `employee`.`empno` = 5"
+    console.log(sqlquery);
+    con.query(sqlquery, function (error, data) {
+      if (error) {
+        console.log('Error deleting employe');
+      }
+      else {
+        console.log('Deleted employee');
+      }
+    });
+    response.end();
   });
+
+
+  app.put("/updateEmployee", function (request, response) {
+    console.log("Something");
+  
+    console.log(request.body)
+    
+    var empno = request.body.empno;
+    var name = request.body.name;
+    var address = request.body.address;
+  
+    var sqlquery = `UPDATE employee SET name = '${name}', address = '${address}'  WHERE empno =  ${empno}`;
+
+    console.log(sqlquery);
+    con.query(sqlquery, function (error, data) {
+      if (error) {
+        console.log('Error updating employee');
+      }
+      else {
+        console.log('Updated employee');
+      }
+    });
+    response.end();
+  });
+
+  
+
 
 
 

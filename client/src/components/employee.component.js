@@ -33,7 +33,7 @@ export default class Employee extends React.Component {
 
     render() {
 
-        if (localStorage.getItem('role') === 1) {
+        if (localStorage.getItem('role') == 1 ) {
             return (
                 <div>
                     <div>Employee Page</div>
@@ -72,6 +72,7 @@ export default class Employee extends React.Component {
                             })}
                         </tbody>
                     </Table>
+                    <button className="btn btn-success">Add Employee</button>
                 </div>
             );
         }
