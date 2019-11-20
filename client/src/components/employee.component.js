@@ -24,47 +24,90 @@ export default class Employee extends React.Component {
                 }, () => { console.log(this.state); })
 
             })
+
+        console.log(localStorage.getItem('name') + ' Saved name');
+        console.log(localStorage.getItem('username') + ' Saved user');
+        console.log(localStorage.getItem('role') + ' Saved role');
     }
 
 
     render() {
-        return (
-            <div>
-                <div>Employee Page</div>
-                {/* <button onClick={this.getEmployees}></button> */}
 
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Employee Number</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Operation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.employee.map(data => {
-                            return (
-                                <tr>
-                                    <td>
-                                        {data.empno}
-                                    </td>
-                                    <td>
-                                        {data.name}
-                                    </td>
-                                    <td>
-                                        {data.address}
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-secondary button">Edit</button>
-                                        <button className="btn btn-danger button">Delete</button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </Table>
-            </div>
-        );
+        if (localStorage.getItem('role') === 1) {
+            return (
+                <div>
+                    <div>Employee Page</div>
+                    {/* <button onClick={this.getEmployees}></button> */}
+
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Employee Number</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.employee.map(data => {
+                                return (
+                                    <tr>
+                                        <td key={data.empno}>
+                                            {data.empno}
+                                        </td>
+                                        <td>
+                                            {data.name}
+                                        </td>
+
+                                        <td>
+                                            {data.address}
+                                        </td>
+                                        <td>
+                                            <button className="btn btn-secondary button">Edit</button>
+                                            <button className="btn btn-danger button">Delete</button>
+                                        </td>
+
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </Table>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div>
+                    <div>Employee Page</div>
+                    {/* <button onClick={this.getEmployees}></button> */}
+
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Employee Number</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.employee.map(data => {
+                                return (
+                                    <tr>
+                                        <td key={data.empno}>
+                                            {data.empno}
+                                        </td>
+                                        <td>
+                                            {data.name}
+                                        </td>
+
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </Table>
+                </div>
+            );
+
+        }
+
     }
 }

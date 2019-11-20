@@ -99,12 +99,26 @@ app.post("/login", function (request, response) {
     }
     else {
       if (data.length == 0) {
+        var errorData = {
+          'username': 'No User Found'
+        }
         console.log('Error');
-        response.status(205).send('Username or Password did not exist');
+        //Status code should be 205 but changed to 201 to handle unknown error in promise in frontend
+        response.status(201).send(errorData);
       }
       else {
         console.log('User Found')
-        response.status(200).send('Credentials Authorised');
+       
+        request.session.role = data[0].role;
+        request.session.username = data[0].username;
+        request.session.name = data[0].name;
+        console.log(request.session.name + " test");
+        var sessionData = {
+          'username': request.session.username,
+          'name': request.session.name, 
+          'role': request.session.role
+        }
+        response.status(200).send(JSON.stringify(sessionData));
 
       }
 
@@ -116,6 +130,25 @@ app.post("/login", function (request, response) {
 
 
 
+app.get('/getEmployee', function(request, response, next) {
+   
+  var sqlquery = `select * from employee`;
+
+  con.query(sqlquery, function (error, data) {
+    if (error) {
+      console.log("Error executing query");
+    }
+    else {
+      console.log("Employee data retrieved");
+      response.send(data);
+
+    }
+
+  });
+
+  });
+
+  
 app.get('/getEmployee', function(request, response, next) {
    
   var sqlquery = `select * from employee`;
