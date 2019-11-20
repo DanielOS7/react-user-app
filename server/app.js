@@ -104,7 +104,19 @@ app.post("/login", function (request, response) {
       }
       else {
         console.log('User Found')
-        response.status(200).send('Credentials Authorised');
+       
+        request.session.role = data[0].role;
+        request.session.username = data[0].username;
+        request.session.name = data[0].name;
+        console.log(request.session.name + " test");
+        var sessionData = {
+          "username": request.session.role,
+          "name": request.session.name, 
+          "role ": request.session.role
+        }
+        // response.write(JSON.stringify(sessionData));
+        // response.status(200).send('Credentials Authorised');
+        response.status(200).send(JSON.stringify(sessionData));
 
       }
 
@@ -116,6 +128,25 @@ app.post("/login", function (request, response) {
 
 
 
+app.get('/getEmployee', function(request, response, next) {
+   
+  var sqlquery = `select * from employee`;
+
+  con.query(sqlquery, function (error, data) {
+    if (error) {
+      console.log("Error executing query");
+    }
+    else {
+      console.log("Employee data retrieved");
+      response.send(data);
+
+    }
+
+  });
+
+  });
+
+  
 app.get('/getEmployee', function(request, response, next) {
    
   var sqlquery = `select * from employee`;

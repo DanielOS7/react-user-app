@@ -43,11 +43,12 @@ export default class Login extends React.Component {
     
             })
             .then(response => {
- 
+                // response.json()
+                console.log( response.json());
 
                 if (response.status === 200) {
                    console.log('Success');
-                   window.location.replace(`http://localhost:3000/employee`);
+                //    window.location.replace(`http://localhost:3000/employee`);
                 } else {
                     alert('Login Failed');
                 };
