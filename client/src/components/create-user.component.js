@@ -20,7 +20,7 @@ export default class CreateUser extends React.Component {
 
                     <Form.Group controlId="formPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="input" placeholder="Password" />
                     </Form.Group>
                     <Form.Group controlId="formName">
                         <Form.Label>Password</Form.Label>
