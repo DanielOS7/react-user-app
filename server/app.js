@@ -116,7 +116,7 @@ app.post("/login", function (request, response) {
 
 
 
-app.get('/employee', function(request, response, next) {
+app.get('/getEmployee', function(request, response, next) {
    
   var sqlquery = `select * from employee`;
 
@@ -125,7 +125,7 @@ app.get('/employee', function(request, response, next) {
       console.log("Error executing query");
     }
     else {
-      console.log("User data retrieved");
+      console.log("Employee data retrieved");
       response.send(data);
 
     }
