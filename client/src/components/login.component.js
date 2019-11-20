@@ -1,25 +1,25 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 
 export default class Login extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
 
         this.state = {
-            username:'',
+            username: '',
             password: '',
-            name:'',
+            name: '',
             role: 0
         };
 
         // this.onSubmit = this.onSubmit.bind(this);
     }
 
-     onSubmit = (e) =>{
+    onSubmit = (e) => {
         e.preventDefault();
         console.log('Was this called');
 
@@ -35,53 +35,42 @@ export default class Login extends React.Component {
 
             console.log(JSON.stringify(data) + " Attempted to be checked")
 
-         
-                // const response = await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`);
-                // const json = await response.json();
-                // this.setState({ data: json });
-              
-            
-    
-             const response = await fetch(`http://localhost:2700/login`,{
-                method:'POST',
+
+            const response = await fetch(`http://localhost:2700/login`, {
+                method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
-    
+
             })
-            // .then(response => {
 
-            //     if (response.status === 200) {
-            //        console.log('Success');
-            //     //    window.location.replace(`http://localhost:3000/employee`);
-            //     } else {
-            //         alert('Login Failed');
-            //     };
-            // } )
-
-            
-
-
-            const responseData =  await response.json();
+            const responseData = await response.json();
             const responseStatus = await response.status;
 
-            console.log (responseData);
-            console.log(responseStatus);
-
-            // console.log(localStorage.getItem(name));
-
-            // console.log(localStorage.getItem('name'));
 
 
-            // setTimeout(() => {
-            //     console.log(localStorage.getItem('name'));
-            //   }, 3000);
+            if (responseStatus === 200) {
+                console.log('Success');
+                localStorage.setItem('name', responseData.name);
+                localStorage.setItem('username', responseData.username);
+                localStorage.setItem('role', responseData.role)
+                console.log(localStorage.getItem('name') + "Saved name");
+                console.log(localStorage.getItem('username') + "Saved user");
+                console.log(localStorage.getItem('role') + "Saved role");
+
+                //    window.location.replace(`http://localhost:3000/employee`);
+
+            }
+            else {
+                alert('Login Failed');
+            }
+
 
         });
 
-         e.target.formUsername.value = "";
-         e.target.formPassword.value = "";
+        e.target.formUsername.value = "";
+        e.target.formPassword.value = "";
 
 
 
@@ -109,7 +98,7 @@ export default class Login extends React.Component {
                     <button className="btn btn-primary" type="submit">
                         Submit
                     </button>
-                </Form><br/>
+                </Form><br />
                 <button onClick={this.getUsers}>Backend Connection Check</button>
             </div>
 

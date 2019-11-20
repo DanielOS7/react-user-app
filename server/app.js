@@ -99,8 +99,12 @@ app.post("/login", function (request, response) {
     }
     else {
       if (data.length == 0) {
+        var errorData = {
+          'username': 'No User Found'
+        }
         console.log('Error');
-        response.status(205).send('Username or Password did not exist');
+        //Status code should be 205 but changed to 201 to handle unknown error in promise in frontend
+        response.status(201).send(errorData);
       }
       else {
         console.log('User Found')
@@ -110,12 +114,10 @@ app.post("/login", function (request, response) {
         request.session.name = data[0].name;
         console.log(request.session.name + " test");
         var sessionData = {
-          "username": request.session.role,
-          "name": request.session.name, 
-          "role ": request.session.role
+          'username': request.session.username,
+          'name': request.session.name, 
+          'role': request.session.role
         }
-        // response.write(JSON.stringify(sessionData));
-        // response.status(200).send('Credentials Authorised');
         response.status(200).send(JSON.stringify(sessionData));
 
       }
