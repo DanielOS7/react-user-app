@@ -48,7 +48,7 @@ export default class Login extends React.Component {
 
                 if (response.status === 200) {
                    console.log('Success');
-                   window.location.replace(`http://localhost:3000`);
+                   window.location.replace(`http://localhost:3000/employee`);
                 } else {
                     alert('Login Failed');
                 };

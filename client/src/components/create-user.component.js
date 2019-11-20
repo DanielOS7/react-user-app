@@ -45,6 +45,15 @@ export default class CreateUser extends React.Component {
                 body: JSON.stringify(data)
     
         })
+        .then(response => {
+ 
+            if (response.status === 200) {
+               console.log('User Created');
+               window.location.replace(`http://localhost:3000/login`);
+            } else {
+                alert('Login Failed');
+            };
+        } )
         });
 
          e.target.formUsername.value = "";

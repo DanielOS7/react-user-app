@@ -7,11 +7,15 @@ var bodyparser = require("body-parser");
 var session = require("express-session");
 var cors = require('cors');
 
+// var employee = require('./routes/employee');
+
 app.use(session({ secret: "shh, secret!" }));
 app.use(cookieparser());
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded(({ extended: true })));
 app.use(cors());
+
+// app.use('/employee', employee);
 
 
 app.get("/getUsers", function (request, response) {
@@ -108,6 +112,27 @@ app.post("/login", function (request, response) {
 
   });
 });
+
+
+
+
+app.get('/employee', function(request, response, next) {
+   
+  var sqlquery = `select * from employee`;
+
+  con.query(sqlquery, function (error, data) {
+    if (error) {
+      console.log("Error executing query");
+    }
+    else {
+      console.log("User data retrieved");
+      response.send(data);
+
+    }
+
+  });
+
+  });
 
 
 
