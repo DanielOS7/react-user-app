@@ -55,11 +55,11 @@ export default class Login extends React.Component {
                 localStorage.setItem('name', responseData.name);
                 localStorage.setItem('username', responseData.username);
                 localStorage.setItem('role', responseData.role)
-                console.log(localStorage.getItem('name') + "Saved name");
-                console.log(localStorage.getItem('username') + "Saved user");
-                console.log(localStorage.getItem('role') + "Saved role");
+                console.log(localStorage.getItem('name') + ' Saved name');
+                console.log(localStorage.getItem('username') + ' Saved user');
+                console.log(localStorage.getItem('role') + ' Saved role');
 
-                //    window.location.replace(`http://localhost:3000/employee`);
+                   window.location.replace(`http://localhost:3000/employee`);
 
             }
             else {
