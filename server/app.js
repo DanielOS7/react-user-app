@@ -79,11 +79,11 @@ app.put("/updateUser", function (request, response) {
 });
 
 
-app.post("/login", function (req, res) {
+app.post("/login", function (request, response) {
 
-  var username = req.body.username;
-  var password = req.body.password;
-  console.log(req.body)
+  var username = request.body.username;
+  var password = request.body.password;
+  console.log(request.body)
 
   var sqlquery = `select * from users where Username='${username}' AND Password='${password}'`;
 
@@ -95,17 +95,18 @@ app.post("/login", function (req, res) {
     }
     else {
       if (data.length == 0) {
-        console.log('Heyyyyy');;
+        console.log('Error');
+        response.status(205).send('Username or Password did not exist');
       }
       else {
         console.log('User Found')
+        response.status(200).send('Credentials Authorised');
 
       }
 
     }
 
   });
-  response.end();
 });
 
 
