@@ -9,7 +9,7 @@ var cors = require('cors');
 
 // var employee = require('./routes/employee');
 
-app.use(session({ secret: "shh, secret!" }));
+app.use(session({ secret: 'shh, secret!' }));
 app.use(cookieparser());
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded(({ extended: true })));
@@ -18,16 +18,16 @@ app.use(cors());
 // app.use('/employee', employee);
 
 
-app.get("/getUsers", function (request, response) {
+app.get('/getUsers', function (request, response) {
 
   var sqlquery = `select * from users`;
 
   con.query(sqlquery, function (error, data) {
     if (error) {
-      console.log("Error executing query");
+      console.log('Error executing query');
     }
     else {
-      console.log("User data retrieved");
+      console.log('User data retrieved');
       response.send(data);
 
     }
@@ -37,8 +37,8 @@ app.get("/getUsers", function (request, response) {
 });
 
 
-app.post("/addUser", function (request, response) {
-  console.log("Something");
+app.post('/addUser', function (request, response) {
+  console.log('Something');
 
   console.log(request.body)
   var username = request.body.username;
@@ -53,14 +53,15 @@ app.post("/addUser", function (request, response) {
       console.log('Error adding a new user');
     }
     else {
-      console.log('New user added');
+      console.log('Added new user');
     }
   });
   response.end();
 });
 
-app.put("/updateUser", function (request, response) {
-  console.log("Something");
+// Note tested as established this wasn't MVP for this project
+app.put('/updateUser', function (request, response) {
+  console.log('Something');
 
   console.log(request.body)
   var username = request.body.username;
@@ -83,7 +84,7 @@ app.put("/updateUser", function (request, response) {
 });
 
 
-app.post("/login", function (request, response) {
+app.post('/login', function (request, response) {
 
   var username = request.body.username;
   var password = request.body.password;
@@ -112,7 +113,7 @@ app.post("/login", function (request, response) {
         request.session.role = data[0].role;
         request.session.username = data[0].username;
         request.session.name = data[0].name;
-        console.log(request.session.name + " test");
+        console.log(request.session.name + 'test');
         var sessionData = {
           'username': request.session.username,
           'name': request.session.name, 
@@ -136,36 +137,87 @@ app.get('/getEmployee', function(request, response, next) {
 
   con.query(sqlquery, function (error, data) {
     if (error) {
-      console.log("Error executing query");
+      console.log('Error executing query');
     }
     else {
-      console.log("Employee data retrieved");
+      console.log('Employee data retrieved');
       response.send(data);
 
     }
 
   });
 
+  });
+
+  app.post('/addEmployee', function (request, response) {
+    console.log('Something');
+  
+    console.log(request.body)
+    
+    var name = request.body.name;
+    var address = request.body.address;
+  
+    var sqlquery = `insert into employee values(${null},'${name}', '${address}')`;
+    console.log(sqlquery);
+    con.query(sqlquery, function (error, data) {
+      if (error) {
+        console.log('Error adding a new Employee');
+      }
+      else {
+        console.log('Added new Employee');
+      }
+    });
+    response.end();
+  });
+
+
+
+  app.delete('/deleteEmployee', function (request, response) {
+    console.log('Something');
+  
+    console.log(request.body)
+    var empno = request.body.empno;
+  
+    var sqlquery = `DELETE FROM employee  WHERE empno =  ${empno}`;
+    // "DELETE FROM `employee` WHERE `employee`.`empno` = 5"
+    console.log(sqlquery);
+    con.query(sqlquery, function (error, data) {
+      if (error) {
+        console.log('Error deleting employe');
+      }
+      else {
+        console.log('Deleted employee');
+      }
+    });
+    response.end();
+  });
+
+
+  app.put('/updateEmployee', function (request, response) {
+    console.log('Something');
+  
+    console.log(request.body)
+    
+    var empno = request.body.empno;
+    var name = request.body.name;
+    var address = request.body.address;
+  
+    var sqlquery = `UPDATE employee SET name = '${name}', address = '${address}'  WHERE empno =  ${empno}`;
+
+    console.log(sqlquery);
+    con.query(sqlquery, function (error, data) {
+      if (error) {
+        console.log('Error updating employee');
+      }
+      else {
+        console.log('Updated employee');
+      }
+    });
+    response.end();
   });
 
   
-app.get('/getEmployee', function(request, response, next) {
-   
-  var sqlquery = `select * from employee`;
 
-  con.query(sqlquery, function (error, data) {
-    if (error) {
-      console.log("Error executing query");
-    }
-    else {
-      console.log("Employee data retrieved");
-      response.send(data);
-
-    }
-
-  });
-
-  });
 
 
 

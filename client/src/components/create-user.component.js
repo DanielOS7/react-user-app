@@ -50,7 +50,7 @@ export default class CreateUser extends React.Component {
                console.log('User Created');
                window.location.replace(`http://localhost:3000/login`);
             } else {
-                alert('Login Failed');
+                alert('User failed to create');
             };
         } )
         });
