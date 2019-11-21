@@ -43,7 +43,7 @@ export default class Login extends React.Component {
                 },
                 body: JSON.stringify(data)
 
-            })
+            });
 
             const responseData = await response.json();
             const responseStatus = await response.status;
