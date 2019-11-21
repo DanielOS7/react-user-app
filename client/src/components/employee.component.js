@@ -120,11 +120,7 @@ export default class Employee extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col">
-
-
-
-
-                            <div>Employee Page</div>
+                            <h1 className="m-2">Employee Page</h1>
                             {/* <button onClick={this.getEmployees}></button> */}
 
                             <Table striped bordered hover>
@@ -184,10 +180,10 @@ export default class Employee extends React.Component {
                                     <Form.Label>Address</Form.Label>
                                     <Form.Control type="input" value={this.state.updateAddressValue} />
                                 </Form.Group>
-                                <button className="btn btn-primary" type="submit">
+                                <button className="btn btn-primary  button" type="submit">
                                     Submit
                                 </button>
-                                <button className="btn btn-danger" onClick={() => { this.editEmployee(false) }} type="button">
+                                <button className="btn btn-danger button" onClick={() => { this.editEmployee(false) }} type="button">
                                     Close
                                 </button><br /><br />
                             </Form>
