@@ -13,7 +13,9 @@ export default class Employee extends React.Component {
         this.state = {
             employee: [],
             edit: false,
-            updateEmpo: 0
+            updateEmpo: 0,
+            updateNameValue: "",
+            updateAddressValue: ""
         };
     }
 
@@ -147,13 +149,16 @@ export default class Employee extends React.Component {
                                                 onClick={() => {
                                                     this.editEmployee(true);
                                                     this.setState({
-                                                        updateEmpo: data.empno
+                                                        updateEmpo: data.empno,
+                                                        updateNameValue: data.name,
+                                                        updateAddressValue: data.address
                                                     }, () => {
-                                                        console.log(this.state.updateEmpo + "meeeeee");
+                                                        console.log(`Empno ${this.state.updateEmpo} has been selected`);
                                                         });
 
                                                 }
-                                                }>Edit
+                                                }>
+                                                    Edit
                                             </button>
                                             <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
                                         </td>
@@ -166,12 +171,12 @@ export default class Employee extends React.Component {
                     <Form onSubmit={ this.onSubmit } style={this.state.edit ? { display: "" } : { display: "none" }}>
                         <Form.Group controlId="formName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="input" placeholder="Enter Name" />
+                            <Form.Control type="input" value={this.state.updateNameValue} />
                         </Form.Group>
 
                         <Form.Group controlId="formAddress">
                             <Form.Label>Address</Form.Label>
-                            <Form.Control type="input" placeholder="Address" />
+                            <Form.Control type="input" value={this.state.updateAddressValue}  />
                         </Form.Group>
                         <button className="btn btn-primary" type="submit">
                             Submit
