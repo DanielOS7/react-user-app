@@ -117,75 +117,84 @@ export default class Employee extends React.Component {
 
         if (localStorage.getItem('role') == 1) {
             return (
-                <div>
-                    <div>Employee Page</div>
-                    {/* <button onClick={this.getEmployees}></button> */}
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
 
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Employee Number</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Operation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.employee.map(data => {
-                                return (
+
+
+
+                            <div>Employee Page</div>
+                            {/* <button onClick={this.getEmployees}></button> */}
+
+                            <Table striped bordered hover>
+                                <thead>
                                     <tr>
-                                        <td key={data.empno}>
-                                            {data.empno}
-                                        </td>
-                                        <td>
-                                            {data.name}
-                                        </td>
-
-                                        <td>
-                                            {data.address}
-                                        </td>
-                                        <td>
-                                            <button className="btn btn-secondary button"
-                                                onClick={() => {
-                                                    this.editEmployee(true);
-                                                    this.setState({
-                                                        updateEmpo: data.empno,
-                                                        updateNameValue: data.name,
-                                                        updateAddressValue: data.address
-                                                    }, () => {
-                                                        console.log(`Empno ${this.state.updateEmpo} has been selected`);
-                                                        });
-
-                                                }
-                                                }>
-                                                    Edit
-                                            </button>
-                                            <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
-                                        </td>
-
+                                        <th>Employee Number</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Operation</th>
                                     </tr>
-                                );
-                            })}
-                        </tbody>
-                    </Table>
-                    <Form onSubmit={ this.onSubmit } style={this.state.edit ? { display: "" } : { display: "none" }}>
-                        <Form.Group controlId="formName">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="input" value={this.state.updateNameValue} />
-                        </Form.Group>
+                                </thead>
+                                <tbody>
+                                    {this.state.employee.map(data => {
+                                        return (
+                                            <tr>
+                                                <td key={data.empno}>
+                                                    {data.empno}
+                                                </td>
+                                                <td>
+                                                    {data.name}
+                                                </td>
 
-                        <Form.Group controlId="formAddress">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control type="input" value={this.state.updateAddressValue}  />
-                        </Form.Group>
-                        <button className="btn btn-primary" type="submit">
-                            Submit
-                    </button>
-                        <button className="btn btn-danger" onClick={() => { this.editEmployee(false) }} type="button">
-                            Close
-                    </button><br /><br />
-                    </Form>
-                    <button className="btn btn-success" onClick={this.redirect} >Add Employee</button>
+                                                <td>
+                                                    {data.address}
+                                                </td>
+                                                <td>
+                                                    <button className="btn btn-secondary button"
+                                                        onClick={() => {
+                                                            this.editEmployee(true);
+                                                            this.setState({
+                                                                updateEmpo: data.empno,
+                                                                updateNameValue: data.name,
+                                                                updateAddressValue: data.address
+                                                            }, () => {
+                                                                console.log(`Empno ${this.state.updateEmpo} has been selected`);
+                                                            });
+
+                                                        }
+                                                        }>
+                                                        Edit
+                                            </button>
+                                                    <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
+                                                </td>
+
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+                            <Form onSubmit={this.onSubmit} style={this.state.edit ? { display: "" } : { display: "none" }}>
+                                <Form.Group controlId="formName">
+                                    <Form.Label>Name</Form.Label>
+                                    <Form.Control type="input" value={this.state.updateNameValue} />
+                                </Form.Group>
+
+                                <Form.Group controlId="formAddress">
+                                    <Form.Label>Address</Form.Label>
+                                    <Form.Control type="input" value={this.state.updateAddressValue} />
+                                </Form.Group>
+                                <button className="btn btn-primary" type="submit">
+                                    Submit
+                                </button>
+                                <button className="btn btn-danger" onClick={() => { this.editEmployee(false) }} type="button">
+                                    Close
+                                </button><br /><br />
+                            </Form>
+                            <button className="btn btn-success" onClick={this.redirect} >Add Employee</button>
+
+                        </div>
+                    </div>
                 </div>
             );
         }
