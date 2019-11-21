@@ -4,13 +4,13 @@ import Button from 'react-bootstrap/Button';
 
 export default class CreateEmployee extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
 
         this.state = {
-            empno:0,
+            empno: 0,
             name: "",
-            address:""
+            address: ""
 
         };
     }
@@ -21,7 +21,7 @@ export default class CreateEmployee extends React.Component {
 
         this.setState({
             name: e.target.formName.value,
-            address:  e.target.formAddress.value,
+            address: e.target.formAddress.value,
         }, () => {
 
             let data = {
@@ -30,28 +30,28 @@ export default class CreateEmployee extends React.Component {
             }
 
             console.log(JSON.stringify(data) + "attempted to be created")
-    
-             fetch(`http://localhost:2700/addEmployee`,{
-                method:'POST',
+
+            fetch(`http://localhost:2700/addEmployee`, {
+                method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
-    
-        })
-        .then(response => {
- 
-            if (response.status === 200) {
-               console.log('Employee Added');
-               window.location.replace(`http://localhost:3000/employee`);
-            } else {
-                alert('Failed to add employee');
-            };
-        } )
+
+            })
+                .then(response => {
+
+                    if (response.status === 200) {
+                        console.log('Employee Added');
+                        window.location.replace(`http://localhost:3000/employee`);
+                    } else {
+                        alert('Failed to add employee');
+                    };
+                })
         });
 
-         e.target.formName.value = "";
-         e.target.formAddress.value = "";
+        e.target.formName.value = "";
+        e.target.formAddress.value = "";
 
 
 
@@ -59,22 +59,31 @@ export default class CreateEmployee extends React.Component {
 
     render() {
         return (
-            <div>
-                <Form onSubmit={this.onSubmit}>
-                    <Form.Group controlId="formName">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="input" placeholder="Enter Name" />
-                    </Form.Group>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <h1 className="m-2">Create Employee Page</h1>
+                        <div>
+                            <Form onSubmit={this.onSubmit}>
+                                <Form.Group controlId="formName">
+                                    <Form.Label>Name</Form.Label>
+                                    <Form.Control type="input" placeholder="Enter Name" />
+                                </Form.Group>
 
-                    <Form.Group controlId="formAddress">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control type="input" placeholder="Address" />
-                    </Form.Group>
-                    <button className="btn btn-primary"  type="submit">
-                        Submit
+                                <Form.Group controlId="formAddress">
+                                    <Form.Label>Address</Form.Label>
+                                    <Form.Control type="input" placeholder="Address" />
+                                </Form.Group>
+                                <button className="btn btn-primary" type="submit">
+                                    Submit
                     </button>
-                </Form>
+                            </Form>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         );
     }
 }

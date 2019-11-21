@@ -59,7 +59,7 @@ export default class Login extends React.Component {
                 console.log(localStorage.getItem('username') + ' Saved user');
                 console.log(localStorage.getItem('role') + ' Saved role');
 
-                   window.location.replace(`http://localhost:3000/employee`);
+                window.location.replace(`http://localhost:3000/employee`);
 
             }
             else {
@@ -76,6 +76,7 @@ export default class Login extends React.Component {
 
     }
 
+    // Not used
     getUsers() {
         fetch(`http://localhost:2700/getUsers`)
             .then(response => response.json())
@@ -85,22 +86,30 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <Form onSubmit={this.onSubmit}>
-                    <Form.Group controlId="formUsername">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control type="input" placeholder="Username" />
-                    </Form.Group>
-                    <Form.Group controlId="formPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="input" placeholder="Password" />
-                    </Form.Group>
-                    <button className="btn btn-primary" type="submit">
-                        Submit
+
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <h1 className="m-2">Login Page</h1>
+                        <div>
+                            <Form onSubmit={this.onSubmit}>
+                                <Form.Group controlId="formUsername">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="input" placeholder="Username" />
+                                </Form.Group>
+                                <Form.Group controlId="formPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="input" placeholder="Password" />
+                                </Form.Group>
+                                <button className="btn btn-primary" type="submit">
+                                    Submit
                     </button>
-                </Form><br />
-                <button onClick={this.getUsers}>Backend Connection Check</button>
+                            </Form><br />
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
         );
     }
