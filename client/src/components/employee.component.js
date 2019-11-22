@@ -173,12 +173,12 @@ export default class Employee extends React.Component {
                             <Form onSubmit={this.onSubmit} style={this.state.edit ? { display: "" } : { display: "none" }}>
                                 <Form.Group controlId="formName">
                                     <Form.Label>Name</Form.Label>
-                                    <Form.Control type="input" value={this.state.updateNameValue} />
+                                    <Form.Control type="input"/>
                                 </Form.Group>
 
                                 <Form.Group controlId="formAddress">
                                     <Form.Label>Address</Form.Label>
-                                    <Form.Control type="input" value={this.state.updateAddressValue} />
+                                    <Form.Control type="input"/>
                                 </Form.Group>
                                 <button className="btn btn-primary  button" type="submit">
                                     Submit

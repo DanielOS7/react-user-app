@@ -59,7 +59,7 @@ app.post('/addUser', function (request, response) {
   response.end();
 });
 
-// Note tested as established this wasn't MVP for this project
+// Not tested as this wasn't MVP for this project
 app.put('/updateUser', function (request, response) {
   console.log('Something');
 

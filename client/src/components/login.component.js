@@ -99,7 +99,7 @@ export default class Login extends React.Component {
                                 </Form.Group>
                                 <Form.Group controlId="formPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="input" placeholder="Password" />
+                                    <Form.Control type="password" placeholder="Password" />
                                 </Form.Group>
                                 <button className="btn btn-primary" type="submit">
                                     Submit
