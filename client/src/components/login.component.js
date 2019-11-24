@@ -11,9 +11,23 @@ export default class Login extends React.Component {
             username: '',
             password: '',
             name: '',
-            role: 0
+            role: 0,
+            redirect: false
         };
     }
+
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/employee' />
+        }
+    }
+
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -48,7 +62,7 @@ export default class Login extends React.Component {
                     console.log(localStorage.getItem('username') + ' Saved user');
                     console.log(localStorage.getItem('role') + ' Saved role');
 
-                    window.location.replace(`http://localhost:3000/employee`)
+                    this.setRedirect();
                 }
                 else {
                     alert('Login Failed');
@@ -68,32 +82,29 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <h1 className="m-2">Login Page</h1>
-                            <div>
-                                <Form onSubmit={this.onSubmit}>
-                                    <Form.Group controlId="formUsername">
-                                        <Form.Label>Username</Form.Label>
-                                        <Form.Control type="input" placeholder="Username" />
-                                    </Form.Group>
-                                    <Form.Group controlId="formPassword">
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Password" />
-                                    </Form.Group>
-                                    <button className="btn btn-primary" type="submit">
-                                        Submit
-                                    </button>
-                                </Form><br />
-                            </div>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        {this.renderRedirect()}
+                        <h1 className="m-2">Login Page</h1>
+                        <div>
+                            <Form onSubmit={this.onSubmit}>
+                                <Form.Group controlId="formUsername">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="input" placeholder="Username" />
+                                </Form.Group>
+                                <Form.Group controlId="formPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Password" />
+                                </Form.Group>
+                                <button className="btn btn-primary" type="submit">
+                                    Submit
+                                </button>
+                            </Form><br />
                         </div>
                     </div>
                 </div>
             </div>
-
-
         );
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Redirect } from 'react-router-dom';
 
 export default class CreateEmployee extends React.Component {
 
@@ -10,14 +11,27 @@ export default class CreateEmployee extends React.Component {
         this.state = {
             empno: 0,
             name: "",
-            address: ""
+            address: "",
+            redirect: false
 
         };
     }
 
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/employee' />
+        }
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('Was this called');
+        console.log('onSubmit was called');
 
         this.setState({
             name: e.target.formName.value,
@@ -43,7 +57,7 @@ export default class CreateEmployee extends React.Component {
 
                     if (response.status === 200) {
                         console.log('Employee Added');
-                        window.location.replace(`http://localhost:3000/employee`);
+                        this.setRedirect();
                     } else {
                         alert('Failed to add employee');
                     };
@@ -62,6 +76,7 @@ export default class CreateEmployee extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col">
+                        {this.renderRedirect()}
                         <h1 className="m-2">Create Employee Page</h1>
                         <div>
                             <Form onSubmit={this.onSubmit}>
@@ -76,7 +91,7 @@ export default class CreateEmployee extends React.Component {
                                 </Form.Group>
                                 <button className="btn btn-primary" type="submit">
                                     Submit
-                    </button>
+                                </button>
                             </Form>
                         </div>
                     </div>

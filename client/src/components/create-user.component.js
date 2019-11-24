@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Redirect } from 'react-router-dom';
 
 export default class CreateUser extends React.Component {
 
@@ -11,14 +12,28 @@ export default class CreateUser extends React.Component {
             username: "",
             password: "",
             name: "",
-            role: 0
-
+            role: 0,
+            redirect: false
         };
     }
 
+
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/login' />
+        }
+    }
+
+
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('Was this called');
+        console.log('onSubmit was called');
 
         this.setState({
             username: e.target.formUsername.value,
@@ -48,7 +63,7 @@ export default class CreateUser extends React.Component {
 
                     if (response.status === 200) {
                         console.log('User Created');
-                        window.location.replace(`http://localhost:3000/login`);
+                        this.setRedirect();
                     } else {
                         alert('User failed to create');
                     };
@@ -58,9 +73,6 @@ export default class CreateUser extends React.Component {
         e.target.formUsername.value = "";
         e.target.formPassword.value = "";
         e.target.formName.value = "";
-
-
-
     }
 
     // Not used
@@ -72,10 +84,10 @@ export default class CreateUser extends React.Component {
 
     render() {
         return (
-
             <div className="container">
                 <div className="row">
                     <div className="col">
+                        {this.renderRedirect()}
                         <h1 className="m-2">Create User Page</h1>
                         <div>
                             <Form onSubmit={this.onSubmit}>
@@ -102,7 +114,7 @@ export default class CreateUser extends React.Component {
 
                                 <button className="btn btn-primary" type="submit">
                                     Submit
-                    </button>
+                                </button>
                             </Form><br />
                         </div>
                     </div>
