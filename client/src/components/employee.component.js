@@ -37,7 +37,7 @@ export default class Employee extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('Was this called');
+        console.log('onSubmit was called');
 
         this.setState({
             name: e.target.formName.value,
@@ -64,7 +64,7 @@ export default class Employee extends React.Component {
 
                     if (response.status === 200) {
                         console.log('Employee Updated');
-                        window.location.replace(`http://localhost:3000/employee`);
+                        window.location.reload();
                     } else {
                         alert('Failed to updaate employee');
                     };
@@ -162,7 +162,7 @@ export default class Employee extends React.Component {
                                                         }
                                                         }>
                                                         Edit
-                                            </button>
+                                                    </button>
                                                     <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
                                                 </td>
 
@@ -173,12 +173,12 @@ export default class Employee extends React.Component {
                             </Table>
                             <Form onSubmit={this.onSubmit} style={this.state.edit ? { display: "" } : { display: "none" }}>
                                 <Form.Group controlId="formName">
-                                    <Form.Label>Name</Form.Label>
+                                    <Form.Label>New Name</Form.Label>
                                     <Form.Control type="input" />
                                 </Form.Group>
 
                                 <Form.Group controlId="formAddress">
-                                    <Form.Label>Address</Form.Label>
+                                    <Form.Label>New Address</Form.Label>
                                     <Form.Control type="input" />
                                 </Form.Group>
                                 <button className="btn btn-primary  button" type="submit">

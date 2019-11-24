@@ -7,7 +7,7 @@ import Login from './components/login.component';
 import CreateUser from './components/create-user.component';
 import Employee from './components/employee.component';
 import CreateEmployee from './components/create-employee.component';
-import {NavBar} from './components/navbar.component';
+import { NavBar } from './components/navbar.component';
 
 class App extends React.Component {
   render() {
@@ -21,7 +21,6 @@ class App extends React.Component {
           <Route path={"/employee"} component={Employee} />
           <Route path={"/create-employee"} component={CreateEmployee} />
         </BrowserRouter>
-
       </div>
     );
   }
