@@ -115,14 +115,15 @@ export default class Employee extends React.Component {
 
         let _updatedeEmpno;
 
-        if (localStorage.getItem('role') == 1) {
+        /* I believe localStorage.setItem may be converting data.role in login component to a string so " + " is being used to convert it to a 
+        number */
+        if (+localStorage.getItem('role') === 1) {
             return (
                 <div className="container">
                     <div className="row">
                         <div className="col">
                             <h1 className="m-2">Employee Page</h1>
                             {/* <button onClick={this.getEmployees}></button> */}
-
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>
@@ -135,8 +136,8 @@ export default class Employee extends React.Component {
                                 <tbody>
                                     {this.state.employee.map(data => {
                                         return (
-                                            <tr>
-                                                <td key={data.empno}>
+                                            <tr key={data.empno}>
+                                                <td>
                                                     {data.empno}
                                                 </td>
                                                 <td>
@@ -173,12 +174,12 @@ export default class Employee extends React.Component {
                             <Form onSubmit={this.onSubmit} style={this.state.edit ? { display: "" } : { display: "none" }}>
                                 <Form.Group controlId="formName">
                                     <Form.Label>Name</Form.Label>
-                                    <Form.Control type="input"/>
+                                    <Form.Control type="input" />
                                 </Form.Group>
 
                                 <Form.Group controlId="formAddress">
                                     <Form.Label>Address</Form.Label>
-                                    <Form.Control type="input"/>
+                                    <Form.Control type="input" />
                                 </Form.Group>
                                 <button className="btn btn-primary  button" type="submit">
                                     Submit
@@ -197,32 +198,38 @@ export default class Employee extends React.Component {
         else {
             return (
                 <div>
-                    <div>Employee Page</div>
+                    <h1>Employee Page</h1>
                     {/* <button onClick={this.getEmployees}></button> */}
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Employee Number</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.employee.map(data => {
+                                            return (
+                                                <tr key={data.empno}>
+                                                    <td>
+                                                        {data.empno}
+                                                    </td>
+                                                    <td>
+                                                        {data.name}
+                                                    </td>
 
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Employee Number</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.employee.map(data => {
-                                return (
-                                    <tr>
-                                        <td key={data.empno}>
-                                            {data.empno}
-                                        </td>
-                                        <td>
-                                            {data.name}
-                                        </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        </div>
+                    </div>
 
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </Table>
                 </div>
             );
 

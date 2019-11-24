@@ -1,11 +1,9 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import { Redirect } from 'react-router-dom'
-
+import { Redirect } from 'react-router-dom';
 
 
 export default class Login extends React.Component {
-
     constructor() {
         super();
 
@@ -15,65 +13,50 @@ export default class Login extends React.Component {
             name: '',
             role: 0
         };
-
-        // this.onSubmit = this.onSubmit.bind(this);
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('Was this called');
-
-        this.setState({
-            username: e.target.formUsername.value,
-            password: e.target.formPassword.value
-        }, async () => {
-
-            let data = {
-                "username": this.state.username,
-                "password": this.state.password
-            }
-
-            console.log(JSON.stringify(data) + " Attempted to be checked")
+        console.log('onSubmit was called');
 
 
-            const response = await fetch(`http://localhost:2700/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
+        let data = {
+            "username": e.target.formUsername.value,
+            "password": e.target.formPassword.value
+        }
 
-            });
+        fetch(`http://localhost:2700/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.status === 200 ? response.json() : response.json().catch(err => err))
+            .then(data => {
+                console.log(data);
 
-            const responseData = await response.json();
-            const responseStatus = await response.status;
+                // data.username chosen as condition as data.name logs "SyntaxError:" instead of undefined. 
+                if (data.username !== undefined) {
+                    console.log('Success');
 
+                    localStorage.setItem('name', data.name);
+                    localStorage.setItem('username', data.username);
+                    localStorage.setItem('role', data.role);
 
+                    console.log(localStorage.getItem('name') + ' Saved name');
+                    console.log(localStorage.getItem('username') + ' Saved user');
+                    console.log(localStorage.getItem('role') + ' Saved role');
 
-            if (responseStatus === 200) {
-                console.log('Success');
-                localStorage.setItem('name', responseData.name);
-                localStorage.setItem('username', responseData.username);
-                localStorage.setItem('role', responseData.role)
-                console.log(localStorage.getItem('name') + ' Saved name');
-                console.log(localStorage.getItem('username') + ' Saved user');
-                console.log(localStorage.getItem('role') + ' Saved role');
-
-                window.location.replace(`http://localhost:3000/employee`);
-
-            }
-            else {
-                alert('Login Failed');
-            }
-
-
-        });
+                    window.location.replace(`http://localhost:3000/employee`)
+                }
+                else {
+                    alert('Login Failed');
+                }
+            })
 
         e.target.formUsername.value = "";
         e.target.formPassword.value = "";
-
-
-
     }
 
     // Not used
@@ -83,28 +66,28 @@ export default class Login extends React.Component {
             .then(data => console.log(data))
     }
 
-
     render() {
         return (
-
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <h1 className="m-2">Login Page</h1>
-                        <div>
-                            <Form onSubmit={this.onSubmit}>
-                                <Form.Group controlId="formUsername">
-                                    <Form.Label>Username</Form.Label>
-                                    <Form.Control type="input" placeholder="Username" />
-                                </Form.Group>
-                                <Form.Group controlId="formPassword">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" />
-                                </Form.Group>
-                                <button className="btn btn-primary" type="submit">
-                                    Submit
-                    </button>
-                            </Form><br />
+            <div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <h1 className="m-2">Login Page</h1>
+                            <div>
+                                <Form onSubmit={this.onSubmit}>
+                                    <Form.Group controlId="formUsername">
+                                        <Form.Label>Username</Form.Label>
+                                        <Form.Control type="input" placeholder="Username" />
+                                    </Form.Group>
+                                    <Form.Group controlId="formPassword">
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control type="password" placeholder="Password" />
+                                    </Form.Group>
+                                    <button className="btn btn-primary" type="submit">
+                                        Submit
+                                    </button>
+                                </Form><br />
+                            </div>
                         </div>
                     </div>
                 </div>
