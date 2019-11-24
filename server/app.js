@@ -46,7 +46,7 @@ app.post('/addUser', function (request, response) {
   var name = request.body.name;
   var role = request.body.role;
 
-  var sqlquery = `insert into users values('${username}', '${password}', '${name}', ${role == 'admin' ? 1 : 2})`;
+  var sqlquery = `insert into users values('${username}', '${password}', '${name}', ${role == 'Admin' ? 1 : 2})`;
   console.log(sqlquery);
   con.query(sqlquery, function (error, data) {
     if (error) {
@@ -59,7 +59,7 @@ app.post('/addUser', function (request, response) {
   response.end();
 });
 
-// Not tested as this wasn't MVP for this project
+// Not tested in postman as this was not a requirment for this project
 app.put('/updateUser', function (request, response) {
   console.log('Something');
 
@@ -104,16 +104,17 @@ app.post('/login', function (request, response) {
           'username': 'No User Found'
         }
         console.log('Error');
-        //Status code should be 205 but changed to 201 to handle unknown error in promise in frontend
-        response.status(201).send(errorData);
+        response.status(205).send(errorData);
       }
+
+
       else {
         console.log('User Found')
        
         request.session.role = data[0].role;
         request.session.username = data[0].username;
         request.session.name = data[0].name;
-        console.log(request.session.name + 'test');
+        console.log(request.session.name + ' test');
         var sessionData = {
           'username': request.session.username,
           'name': request.session.name, 
@@ -152,7 +153,7 @@ app.get('/getEmployee', function(request, response, next) {
   app.post('/addEmployee', function (request, response) {
     console.log('Something');
   
-    console.log(request.body)
+    console.log(request.body);
     
     var name = request.body.name;
     var address = request.body.address;
@@ -179,7 +180,6 @@ app.get('/getEmployee', function(request, response, next) {
     var empno = request.body.empno;
   
     var sqlquery = `DELETE FROM employee  WHERE empno =  ${empno}`;
-    // "DELETE FROM `employee` WHERE `employee`.`empno` = 5"
     console.log(sqlquery);
     con.query(sqlquery, function (error, data) {
       if (error) {

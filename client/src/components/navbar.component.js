@@ -11,14 +11,14 @@ export const NavBar = (props) => {
                     <Nav className="mr-auto">
                         <Nav.Link href="http://localhost:3000">Home</Nav.Link>
                         <Nav.Link href="http://localhost:3000/create-user">Create User</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown title="Pages" id="basic-nav-dropdown">
                             <NavDropdown.Item href="http://localhost:3000">Home</NavDropdown.Item>
                             <NavDropdown.Item href="http://localhost:3000/login">Login</NavDropdown.Item>
                             <NavDropdown.Item href="http://localhost:3000/create-user">Create User</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <NavItem className="ml-auto">
-                    <Button clssName="btn btn-primary" href="/login">Login</Button>
+                    <Button className="btn btn-primary" href="/login">Login</Button>
                     </NavItem>
                 </Navbar.Collapse>
             </Navbar>
