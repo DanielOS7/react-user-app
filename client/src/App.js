@@ -14,8 +14,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <SideNavigation />
+        <div className="App-body">
+        <NavBar />
         <BrowserRouter>
           <Route exact path={"/"} component={Home} />
           <Route path={"/login"} component={Login} />
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Route path={"/employee"} component={Employee} />
           <Route path={"/create-employee"} component={CreateEmployee} />
         </BrowserRouter>
+        </div>
       </div>
     );
   }
