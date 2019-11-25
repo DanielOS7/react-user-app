@@ -8,12 +8,14 @@ import CreateUser from './components/create-user.component';
 import Employee from './components/employee.component';
 import CreateEmployee from './components/create-employee.component';
 import { NavBar } from './components/navbar.component';
+import { SideNavigation } from './components/sidenav.component';
 
 class App extends React.Component {
   render() {
     return (
       <div>
         <NavBar />
+        <SideNavigation />
         <BrowserRouter>
           <Route exact path={"/"} component={Home} />
           <Route path={"/login"} component={Login} />
