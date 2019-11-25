@@ -7,7 +7,6 @@ import Employee from './components/employee.component';
 import CreateEmployee from './components/create-employee.component';
 import { NavBar } from './components/navbar.component';
 import  SideNavigation from './components/sidenav.component';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import './App.css';
