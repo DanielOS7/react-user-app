@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 export const SideNavigation = (props) => {
     return (
-        <SideNav
+        <SideNav style={{backgroundColor: "#343a40"}}
             onSelect={(selected) => {
                 // Add your code here
             }}>
