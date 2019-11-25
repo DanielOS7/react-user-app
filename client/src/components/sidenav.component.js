@@ -1,13 +1,13 @@
 import React from 'react';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import Button from 'react-bootstrap/Button';
 
+// This component is no longer used and the SideNav has been further developed in App.js
 export const SideNavigation = (props) => {
     return (
-        <SideNav style={{backgroundColor: "#343a40"}}
+        <SideNav style={{ backgroundColor: "#343a40" }}
             onSelect={(selected) => {
-                // Add your code here
+                
             }}>
             <SideNav.Toggle />
             <SideNav.Nav defaultSelected="home">
