@@ -148,6 +148,7 @@ export default class Employee extends React.Component {
                                                     {data.address}
                                                 </td>
                                                 <td>
+                                                    <div style={{display: "flex"}}>
                                                     <button className="btn btn-secondary button"
                                                         onClick={() => {
                                                             this.editEmployee(true);
@@ -159,11 +160,12 @@ export default class Employee extends React.Component {
                                                                 console.log(`Empno ${this.state.updateEmpo} has been selected`);
                                                             });
 
-                                                        }
+                                                            }
                                                         }>
                                                         Edit
                                                     </button>
                                                     <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
+                                                    </div>
                                                 </td>
 
                                             </tr>

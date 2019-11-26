@@ -10,8 +10,8 @@
 .page-links{
     font-size: x-large;
     text-align: center;
-    margin: 10px;
     position: relative;
-    top: 35vh;
+    top: 30vh;
+    right: 3vw;
 
 }
