@@ -1,14 +1,46 @@
 import React from 'react';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faUserLock, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 export default class SideNavigation extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            redirect: false
+        };
+    }
+    
+    // setRedirect = (_redirect, _path) => {
+    //     this.setState({
+    //         redirect: _redirect
+    //     }, () => {
+    //         if (this.state.redirect) {
+    //             return <Redirect to={`/${_path}`}/>
+    //         }
+    //     })
+
+    //  Not to be used
+    //     this.setState({
+            
+    //         redirect: !this.state.redirect
+    //     })
+    // }
+
+    // renderRedirect = (_path) => {
+    //     if (this.state.redirect) {
+    //         return <Redirect to= {`/employee/${_path}`  } />
+    //     }
+    // }
 
     render() {
         return (
             <SideNav
-                style={{ backgroundColor: "#343a40", marginTop: "55px" }}
+                style={{ backgroundColor: "#343a40", color: "white", marginTop: "55px", position: "fixed" }}
                 onToggle={(toggled) => {
                     if (toggled === true) {
                         this.props.setConentPush("240px");
@@ -19,23 +51,46 @@ export default class SideNavigation extends React.Component {
                 }}
             >
                 <SideNav.Toggle />
-                <SideNav.Nav defaultSelected="home">
-                    <NavItem eventKey="home">
+                <SideNav.Nav >
+                    <NavItem eventKey="home"
+                    onClick={() => {
+                        window.location.replace("http://localhost:3000");
+                        // this.setRedirect(true, "login");
+                        // this.renderRedirect("home"); Attempted this in setRedirect setState callback.
+                        // this.setRedirect(false); Attempted this in setRedirect.
+                        }}>
                         <NavIcon>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                            <FontAwesomeIcon icon={faHome} />
                         </NavIcon>
                         <NavText>
                             Home
                           </NavText>
                     </NavItem>
-                    <NavItem eventKey="devices">
+
+
+
+                    <NavItem eventKey="login"
+                    onClick={() => {window.location.replace("http://localhost:3000/login");}}>
                         <NavIcon>
-                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                            <FontAwesomeIcon icon={faLock} />
                         </NavIcon>
                         <NavText>
-                            Devices
+                            Login
                           </NavText>
                     </NavItem>
+
+
+                    <NavItem eventKey="create-user"
+                    onClick={() => {
+                        window.location.replace("http://localhost:3000/create-user");}}>
+                        <NavIcon>
+                            <FontAwesomeIcon icon={faUser} />
+                        </NavIcon>
+                        <NavText>
+                            Create User
+                          </NavText>
+                    </NavItem>
+
                 </SideNav.Nav>
             </SideNav>
         );

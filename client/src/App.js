@@ -34,7 +34,7 @@ class App extends React.Component {
         <SideNavigation
         setConentPush={this.setConentPush}
         />
-          <div style={{ marginLeft: this.state.contentMarginLeft }}>
+          <div style={{ marginLeft: this.state.contentMarginLeft, position: "relative", top: "60px"}}>
             <BrowserRouter>
               <Route exact path={"/"} component={Home} />
               <Route path={"/login"} component={Login} />
