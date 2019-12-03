@@ -1,20 +1,20 @@
 import React from 'react';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faUserLock, faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 export default class SideNavigation extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            redirect: false
-        };
-    }
-    
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         redirect: false
+    //     };
+    // }
+
     // setRedirect = (_redirect, _path) => {
     //     this.setState({
     //         redirect: _redirect
@@ -26,7 +26,7 @@ export default class SideNavigation extends React.Component {
 
     //  Not to be used
     //     this.setState({
-            
+
     //         redirect: !this.state.redirect
     //     })
     // }
@@ -53,11 +53,11 @@ export default class SideNavigation extends React.Component {
                 <SideNav.Toggle />
                 <SideNav.Nav >
                     <NavItem eventKey="home"
-                    onClick={() => {
-                        window.location.replace("http://localhost:3000");
-                        // this.setRedirect(true, "login");
-                        // this.renderRedirect("home"); Attempted this in setRedirect setState callback.
-                        // this.setRedirect(false); Attempted this in setRedirect.
+                        onClick={() => {
+                            window.location.replace("http://localhost:3000");
+                            // this.setRedirect(true, "login");
+                            // this.renderRedirect("home"); Attempted this in setRedirect setState callback.
+                            // this.setRedirect(false); Attempted this in setRedirect.
                         }}>
                         <NavIcon>
                             <FontAwesomeIcon icon={faHome} />
@@ -68,8 +68,8 @@ export default class SideNavigation extends React.Component {
                     </NavItem>
 
 
-
-                    <NavItem eventKey="login"
+                    {/* Will only have links to login in navbar not sidenav */}
+                    {/* <NavItem eventKey="login"
                     onClick={() => {window.location.replace("http://localhost:3000/login");}}>
                         <NavIcon>
                             <FontAwesomeIcon icon={faLock} />
@@ -77,12 +77,13 @@ export default class SideNavigation extends React.Component {
                         <NavText>
                             Login
                           </NavText>
-                    </NavItem>
+                    </NavItem> */}
 
 
                     <NavItem eventKey="create-user"
-                    onClick={() => {
-                        window.location.replace("http://localhost:3000/create-user");}}>
+                        onClick={() => {
+                            window.location.replace("http://localhost:3000/create-user");
+                        }}>
                         <NavIcon>
                             <FontAwesomeIcon icon={faUser} />
                         </NavIcon>
