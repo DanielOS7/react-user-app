@@ -1,4 +1,4 @@
-const api = 'http://localhost:2700/employee';
+const api = 'http://localhost:2700/api/v1/employee';
 
 export default class EmployeeService {
 

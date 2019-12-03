@@ -1,4 +1,4 @@
-const api = 'http://localhost:2700/login';
+const api = 'http://localhost:2700/api/v1/login';
 
 export default class LoginService {
 
