@@ -15,9 +15,9 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded(({ extended: true })));
 app.use(cors());
 
-app.use('/employee', employee);
-app.use('/user', user);
-app.use('/login', login);
+app.use('/api/v1/employee', employee);
+app.use('/api/v1/user', user);
+app.use('/api/v1/login', login);
 
 
 

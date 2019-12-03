@@ -1,10 +1,16 @@
 var mysql=require('mysql');
+let allConfig = require('./config.js');
+let profile = allConfig.currentProfile;
+let config = allConfig[profile];
+
 
 module.exports=function connection(){
+let database = config.database;
+
 var con = mysql.createConnection({
- host:"localhost",
- user:"root",
- database:"nationwide"
+ host: database.host,
+ user: database.user,
+ database: database.name
 });
 
 con.connect(function(err) {
