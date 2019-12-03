@@ -1,12 +1,14 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router-dom';
+import UserService from './services/user.service';
 
 export default class CreateUser extends React.Component {
 
     constructor() {
         super();
+
+        this.userService = new UserService();
 
         this.state = {
             username: "",
@@ -16,7 +18,6 @@ export default class CreateUser extends React.Component {
             redirect: false
         };
     }
-
 
     setRedirect = () => {
         this.setState({
@@ -32,54 +33,30 @@ export default class CreateUser extends React.Component {
 
 
     onSubmit = (e) => {
+
         e.preventDefault();
         console.log('onSubmit was called');
 
-        this.setState({
-            username: e.target.formUsername.value,
-            password: e.target.formPassword.value,
-            name: e.target.formName.value,
-            role: e.target.formRole.value
-        }, () => {
+        let data = {
+            "username": e.target.formUsername.value,
+            "password": e.target.formPassword.value,
+            "name": e.target.formName.value,
+            "role": e.target.formRole.value
+        }
 
-            let data = {
-                "username": this.state.username,
-                "password": this.state.password,
-                "name": this.state.name,
-                "role": this.state.role
-            }
+        console.log(JSON.stringify(data) + ' attempted to be created')
 
-            console.log(JSON.stringify(data) + "attempted to be created")
-
-            fetch(`http://localhost:2700/addUser`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-
+        this.userService.createUsers(data)
+            .then(response => {
+                if (response.status === 200) {
+                    console.log('New User Created');
+                    this.setRedirect();
+                } else {
+                    alert('User failed to create');
+                };
             })
-                .then(response => {
 
-                    if (response.status === 200) {
-                        console.log('User Created');
-                        this.setRedirect();
-                    } else {
-                        alert('User failed to create');
-                    };
-                })
-        });
 
-        e.target.formUsername.value = "";
-        e.target.formPassword.value = "";
-        e.target.formName.value = "";
-    }
-
-    // Not used
-    getUsers() {
-        fetch(`http://localhost:2700/getUsers`)
-            .then(response => response.json())
-            .then(data => console.log(data))
     }
 
     render() {

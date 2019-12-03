@@ -38,7 +38,6 @@ app.get('/getUsers', function (request, response) {
 
 
 app.post('/addUser', function (request, response) {
-  console.log('Something');
 
   console.log(request.body)
   var username = request.body.username;
@@ -61,7 +60,6 @@ app.post('/addUser', function (request, response) {
 
 // Not tested in postman as this was not a requirment for this project
 app.put('/updateUser', function (request, response) {
-  console.log('Something');
 
   console.log(request.body)
   var username = request.body.username;
@@ -151,7 +149,6 @@ app.get('/getEmployee', function(request, response, next) {
   });
 
   app.post('/addEmployee', function (request, response) {
-    console.log('Something');
   
     console.log(request.body);
     
@@ -174,7 +171,6 @@ app.get('/getEmployee', function(request, response, next) {
 
 
   app.delete('/deleteEmployee', function (request, response) {
-    console.log('Something');
   
     console.log(request.body)
     var empno = request.body.empno;
@@ -194,8 +190,7 @@ app.get('/getEmployee', function(request, response, next) {
 
 
   app.put('/updateEmployee', function (request, response) {
-    console.log('Something');
-  
+    
     console.log(request.body)
     
     var empno = request.body.empno;

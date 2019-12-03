@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import EmployeeService from './services/employee.service';
 import { Redirect } from 'react-router-dom';
 
 export default class CreateEmployee extends React.Component {
@@ -8,12 +8,13 @@ export default class CreateEmployee extends React.Component {
     constructor() {
         super();
 
+        this.employeeService = new EmployeeService();
+
         this.state = {
             empno: 0,
             name: "",
             address: "",
             redirect: false
-
         };
     }
 
@@ -33,41 +34,23 @@ export default class CreateEmployee extends React.Component {
         e.preventDefault();
         console.log('onSubmit was called');
 
-        this.setState({
-            name: e.target.formName.value,
-            address: e.target.formAddress.value,
-        }, () => {
+        let data = {
+            "name": e.target.formName.value,
+            "address": e.target.formAddress.value
+        }
 
-            let data = {
-                "name": this.state.name,
-                "address": this.state.address
-            }
+        console.log(JSON.stringify(data) + 'attempted to be created')
 
-            console.log(JSON.stringify(data) + "attempted to be created")
+        this.employeeService.createEmployee(data)
+            .then(response => {
 
-            fetch(`http://localhost:2700/addEmployee`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-
+                if (response.status === 200) {
+                    console.log('Employee Created');
+                    this.setRedirect();
+                } else {
+                    alert('Failed to create employee');
+                };
             })
-                .then(response => {
-
-                    if (response.status === 200) {
-                        console.log('Employee Added');
-                        this.setRedirect();
-                    } else {
-                        alert('Failed to add employee');
-                    };
-                })
-        });
-
-        e.target.formName.value = "";
-        e.target.formAddress.value = "";
-
-
 
     }
 

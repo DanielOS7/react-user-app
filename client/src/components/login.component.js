@@ -1,17 +1,15 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import LoginService from './services/login.service'
 import { Redirect } from 'react-router-dom';
-
 
 export default class Login extends React.Component {
     constructor() {
         super();
 
+        this.loginService = new LoginService();
+
         this.state = {
-            username: '',
-            password: '',
-            name: '',
-            role: 0,
             redirect: false
         };
     }
@@ -33,22 +31,13 @@ export default class Login extends React.Component {
         e.preventDefault();
         console.log('onSubmit was called');
 
-
         let data = {
             "username": e.target.formUsername.value,
             "password": e.target.formPassword.value
         }
 
-        fetch(`http://localhost:2700/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => response.status === 200 ? response.json() : response.json().catch(err => err))
+        this.loginService.login(data)
             .then(data => {
-                console.log(data);
 
                 // data.username chosen as condition as data.name logs "SyntaxError:" instead of undefined. 
                 if (data.username !== undefined) {
@@ -69,15 +58,6 @@ export default class Login extends React.Component {
                 }
             })
 
-        e.target.formUsername.value = "";
-        e.target.formPassword.value = "";
-    }
-
-    // Not used
-    getUsers() {
-        fetch(`http://localhost:2700/getUsers`)
-            .then(response => response.json())
-            .then(data => console.log(data))
     }
 
     render() {

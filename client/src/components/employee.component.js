@@ -1,119 +1,98 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import EmployeeService from './services/employee.service';
+import { Redirect } from 'react-router-dom';
+
 import './css/employee.css'
 
-
 export default class Employee extends React.Component {
+
     constructor() {
         super();
+
+        this.employeeService = new EmployeeService();
 
         this.state = {
             employee: [],
             edit: false,
             updateEmpo: 0,
-            updateNameValue: "",
-            updateAddressValue: ""
+            redirect: false
         };
     }
 
+    setUpdateEmpo = (empno, name) => {
+        this.setState({
+            updateEmpo: empno
+        }, () => { console.log(`Empno: ${this.state.updateEmpo} ${name} has been selected`); })
+
+    }
+
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/create-employee' />
+        }
+    }
+
     componentDidMount = () => {
-        fetch(`http://localhost:2700/getEmployee`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
+
+        this.employeeService.getEmployees()
+            .then(data =>
                 this.setState({
                     employee: data
-                }, () => { console.log(this.state); })
-
-            })
+                })
+            );
 
         console.log(localStorage.getItem('name') + ' Saved name');
         console.log(localStorage.getItem('username') + ' Saved user');
         console.log(localStorage.getItem('role') + ' Saved role');
     }
 
+
     onSubmit = (e) => {
-        e.preventDefault();
         console.log('onSubmit was called');
 
-        this.setState({
-            name: e.target.formName.value,
-            address: e.target.formAddress.value,
-        }, () => {
+        let data = {
+            'empno': this.state.updateEmpo,
+            'name': e.target.formName.value,
+            'address': e.target.formAddress.value
+        }
 
-            let data = {
-                "empno": this.state.updateEmpo,
-                "name": this.state.name,
-                "address": this.state.address
-            }
+        console.log(JSON.stringify(data) + ' attempted to be updated')
 
-            console.log(JSON.stringify(data) + "attempted to be created")
-
-            fetch(`http://localhost:2700/updateEmployee`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-
-            })
-                .then(response => {
-
-                    if (response.status === 200) {
-                        console.log('Employee Updated');
-                        window.location.reload();
-                    } else {
-                        alert('Failed to updaate employee');
-                    };
-                })
-        });
-
-        e.target.formName.value = "";
-        e.target.formAddress.value = "";
-
-
+        this.employeeService.updateEmployee(data)
 
     }
 
-    deleteEmployee(_empno) {
+
+    deleteEmployee = (_empno) => {
 
         let data = {
-            "empno": _empno
+            'empno': _empno
         }
-        console.log(JSON.stringify(data) + " " + _empno)
-        fetch(`http://localhost:2700/deleteEmployee`, {
-            method: 'Delete',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
+        console.log('Employee with ID: ' + JSON.stringify(data) + ' attempted to be deleted')
 
-        })
 
-        window.location.reload();
+        this.employeeService.deleteEmployee(data)
+
+        // Example of reusable employeeRequest() from employee service. 
+        // this.employeeService.employeeRequest('DELETE', data, '/deleteEmployee')
 
     }
 
-    editEmployee = (state) => {
+    editEmployeeToggle = (state) => {
         this.setState({
             edit: state
         })
     }
 
-
-    uploade
-
-    redirect() {
-        window.location.replace(`http://localhost:3000/create-employee`);
-    }
-
-
     render() {
-
-        let _updatedeEmpno;
 
         /* I believe localStorage.setItem may be converting data.role in login component to a string so " + " is being used to convert it to a 
         number */
@@ -123,7 +102,7 @@ export default class Employee extends React.Component {
                     <div className="row">
                         <div className="col">
                             <h1 className="m-2">Employee Page</h1>
-                            {/* <button onClick={this.getEmployees}></button> */}
+                            {this.renderRedirect()}
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>
@@ -148,23 +127,16 @@ export default class Employee extends React.Component {
                                                     {data.address}
                                                 </td>
                                                 <td>
-                                                    <div style={{display: "flex"}}>
-                                                    <button className="btn btn-secondary button"
-                                                        onClick={() => {
-                                                            this.editEmployee(true);
-                                                            this.setState({
-                                                                updateEmpo: data.empno,
-                                                                updateNameValue: data.name,
-                                                                updateAddressValue: data.address
-                                                            }, () => {
-                                                                console.log(`Empno ${this.state.updateEmpo} has been selected`);
-                                                            });
-
+                                                    <div style={{ display: "flex" }}>
+                                                        <button className="btn btn-secondary button"
+                                                            onClick={() => {
+                                                                this.editEmployeeToggle(true);
+                                                                this.setUpdateEmpo(data.empno, data.name);
                                                             }
-                                                        }>
-                                                        Edit
+                                                            }>
+                                                            Edit
                                                     </button>
-                                                    <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
+                                                        <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
                                                     </div>
                                                 </td>
 
@@ -186,11 +158,12 @@ export default class Employee extends React.Component {
                                 <button className="btn btn-primary  button" type="submit">
                                     Submit
                                 </button>
-                                <button className="btn btn-danger button" onClick={() => { this.editEmployee(false) }} type="button">
+                                <button className="btn btn-danger button" onClick={() => { this.editEmployeeToggle(false) }} type="button">
                                     Close
                                 </button><br /><br />
                             </Form>
-                            <button className="btn btn-success" onClick={this.redirect} >Add Employee</button>
+                            <button className="btn btn-success"
+                                onClick={this.setRedirect}> Add Employee</button>
 
                         </div>
                     </div>
@@ -200,11 +173,10 @@ export default class Employee extends React.Component {
         else {
             return (
                 <div>
-                    <h1>Employee Page</h1>
-                    {/* <button onClick={this.getEmployees}></button> */}
                     <div className="container">
                         <div className="row">
-                            <div className="col">
+                            <div className="col-6">
+                                <h1 className="m-2">Employee Page</h1>
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>
@@ -231,7 +203,6 @@ export default class Employee extends React.Component {
                             </div>
                         </div>
                     </div>
-
                 </div>
             );
 
