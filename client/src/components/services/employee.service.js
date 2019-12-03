@@ -1,14 +1,14 @@
-const api = 'http://localhost:2700';
+const api = 'http://localhost:2700/employee';
 
 export default class EmployeeService {
 
     getEmployees() {
-        return fetch(`${api}/getEmployee`)
+        return fetch(`${api}`)
             .then(response => response.json())
     }
 
     updateEmployee(body) {
-        return fetch(`${api}/updateEmployee`, {
+        return fetch(`${api}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export default class EmployeeService {
     }
 
     createEmployee(data) {
-        return fetch(`${api}/addEmployee`, {
+        return fetch(`${api}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export default class EmployeeService {
     }
 
     deleteEmployee(body) {
-        return fetch(`${api}/deleteEmployee`, {
+        return fetch(`${api}`, {
             method: 'Delete',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 import React from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faUser } from '@fortawesome/free-solid-svg-icons'
 

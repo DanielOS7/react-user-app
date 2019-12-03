@@ -1,10 +1,10 @@
-const api = 'http://localhost:2700';
+const api = 'http://localhost:2700/user';
 
 export default class UserService {
 
     createUsers = (_body) => {
 
-        return fetch(`${api}/addUser`, {
+        return fetch(`${api}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

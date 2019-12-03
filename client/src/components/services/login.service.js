@@ -1,10 +1,10 @@
-const api = 'http://localhost:2700';
+const api = 'http://localhost:2700/login';
 
 export default class LoginService {
 
     login = (_body) => {
 
-        return fetch(`${api}/login`, {
+        return fetch(`${api}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
