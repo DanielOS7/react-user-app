@@ -94,94 +94,30 @@ export default class Employee extends React.Component {
 
     render() {
 
-        /* I believe localStorage.setItem may be converting data.role in login component to a string so " + " is being used to convert it to a 
-        number */
-        if (+localStorage.getItem('role') === 1) {
-            return (
-                <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <h1 className="m-2">Employee Page</h1>
-                            {this.renderRedirect()}
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>Employee Number</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Operation</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.employee.map(data => {
-                                        return (
-                                            <tr key={data.empno}>
-                                                <td>
-                                                    {data.empno}
-                                                </td>
-                                                <td>
-                                                    {data.name}
-                                                </td>
 
-                                                <td>
-                                                    {data.address}
-                                                </td>
-                                                <td>
-                                                    <div style={{ display: "flex" }}>
-                                                        <button className="btn btn-secondary button"
-                                                            onClick={() => {
-                                                                this.editEmployeeToggle(true);
-                                                                this.setUpdateEmpo(data.empno, data.name);
-                                                            }
-                                                            }>
-                                                            Edit
-                                                    </button>
-                                                        <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
-                                                    </div>
-                                                </td>
 
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </Table>
-                            <Form onSubmit={this.onSubmit} style={this.state.edit ? { display: "" } : { display: "none" }}>
-                                <Form.Group controlId="formName">
-                                    <Form.Label>New Name</Form.Label>
-                                    <Form.Control type="input" />
-                                </Form.Group>
-
-                                <Form.Group controlId="formAddress">
-                                    <Form.Label>New Address</Form.Label>
-                                    <Form.Control type="input" />
-                                </Form.Group>
-                                <button className="btn btn-primary  button" type="submit">
-                                    Submit
-                                </button>
-                                <button className="btn btn-danger button" onClick={() => { this.editEmployeeToggle(false) }} type="button">
-                                    Close
-                                </button><br /><br />
-                            </Form>
-                            <button className="btn btn-success"
-                                onClick={this.setRedirect}> Add Employee</button>
-
-                        </div>
-                    </div>
-                </div>
-            );
+        if (localStorage.getItem('loggedIn') === 'false') {
+            window.location.replace("http://localhost:3000/login");
         }
         else {
-            return (
-                <div>
+            console.log(localStorage.getItem('username'));
+
+            /* I believe localStorage.setItem may be converting data.role in login component to a string so " + " is being used to convert it to a 
+            number */
+            if (+localStorage.getItem('role') === 1) {
+                return (
                     <div className="container">
                         <div className="row">
-                            <div className="col-6">
+                            <div className="col">
                                 <h1 className="m-2">Employee Page</h1>
+                                {this.renderRedirect()}
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>
                                             <th>Employee Number</th>
                                             <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Operation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -195,18 +131,92 @@ export default class Employee extends React.Component {
                                                         {data.name}
                                                     </td>
 
+                                                    <td>
+                                                        {data.address}
+                                                    </td>
+                                                    <td>
+                                                        <div style={{ display: "flex" }}>
+                                                            <button className="btn btn-secondary button"
+                                                                onClick={() => {
+                                                                    this.editEmployeeToggle(true);
+                                                                    this.setUpdateEmpo(data.empno, data.name);
+                                                                }
+                                                                }>
+                                                                Edit
+                                                        </button>
+                                                            <button className="btn btn-danger button" onClick={() => { this.deleteEmployee(data.empno) }}>Delete</button>
+                                                        </div>
+                                                    </td>
+
                                                 </tr>
                                             );
                                         })}
                                     </tbody>
                                 </Table>
+                                <Form onSubmit={this.onSubmit} style={this.state.edit ? { display: "" } : { display: "none" }}>
+                                    <Form.Group controlId="formName">
+                                        <Form.Label>New Name</Form.Label>
+                                        <Form.Control type="input" />
+                                    </Form.Group>
+
+                                    <Form.Group controlId="formAddress">
+                                        <Form.Label>New Address</Form.Label>
+                                        <Form.Control type="input" />
+                                    </Form.Group>
+                                    <button className="btn btn-primary  button" type="submit">
+                                        Submit
+                                    </button>
+                                    <button className="btn btn-danger button" onClick={() => { this.editEmployeeToggle(false) }} type="button">
+                                        Close
+                                    </button><br /><br />
+                                </Form>
+                                <button className="btn btn-success"
+                                    onClick={this.setRedirect}> Add Employee</button>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
+            }
+            else {
+                return (
+                    <div>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-4">
+                                <h1 className="m-2">Employee Page</h1>
+                                <div className="col-10">
+                                     <Table striped bordered hover>
+                                        <thead>
+                                            <tr>
+                                                <th>Employee Number</th>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.state.employee.map(data => {
+                                                return (
+                                                    <tr key={data.empno}>
+                                                        <td>
+                                                            {data.empno}
+                                                        </td>
+                                                        <td>
+                                                            {data.name}
+                                                        </td>
 
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </Table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+
+            }
         }
-
     }
 }

@@ -46,12 +46,14 @@ export default class Login extends React.Component {
                     localStorage.setItem('name', data.name);
                     localStorage.setItem('username', data.username);
                     localStorage.setItem('role', data.role);
-
+                    localStorage.setItem('loggedIn', 'true');
+                   
                     console.log(localStorage.getItem('name') + ' Saved name');
                     console.log(localStorage.getItem('username') + ' Saved user');
                     console.log(localStorage.getItem('role') + ' Saved role');
 
-                    this.setRedirect();
+                    window.location.replace('http://localhost:3000/employee');
+                    // this.setRedirect();
                 }
                 else {
                     alert('Login Failed');
@@ -78,7 +80,7 @@ export default class Login extends React.Component {
                                     <Form.Control type="password" placeholder="Password" />
                                 </Form.Group>
                                 <button className="btn btn-primary" type="submit">
-                                    Submit
+                                    Login
                                 </button>
                             </Form><br />
                         </div>

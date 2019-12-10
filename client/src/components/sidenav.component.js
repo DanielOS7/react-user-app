@@ -8,34 +8,6 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 export default class SideNavigation extends React.Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         redirect: false
-    //     };
-    // }
-
-    // setRedirect = (_redirect, _path) => {
-    //     this.setState({
-    //         redirect: _redirect
-    //     }, () => {
-    //         if (this.state.redirect) {
-    //             return <Redirect to={`/${_path}`}/>
-    //         }
-    //     })
-
-    //  Not to be used
-    //     this.setState({
-
-    //         redirect: !this.state.redirect
-    //     })
-    // }
-
-    // renderRedirect = (_path) => {
-    //     if (this.state.redirect) {
-    //         return <Redirect to= {`/employee/${_path}`  } />
-    //     }
-    // }
 
     render() {
         return (
@@ -67,7 +39,6 @@ export default class SideNavigation extends React.Component {
                           </NavText>
                     </NavItem>
 
-
                     {/* Will only have links to login in navbar not sidenav */}
                     {/* <NavItem eventKey="login"
                     onClick={() => {window.location.replace("http://localhost:3000/login");}}>
@@ -78,7 +49,6 @@ export default class SideNavigation extends React.Component {
                             Login
                           </NavText>
                     </NavItem> */}
-
 
                     <NavItem eventKey="create-user"
                         onClick={() => {
@@ -96,4 +66,34 @@ export default class SideNavigation extends React.Component {
             </SideNav>
         );
     }
+
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         redirect: false
+    //     };
+    // }
+
+    // setRedirect = (_redirect, _path) => {
+    //     this.setState({
+    //         redirect: _redirect
+    //     }, () => {
+    //         if (this.state.redirect) {
+    //             return <Redirect to={`/${_path}`}/>
+    //         }
+    //     })
+
+    // //  Not to be used
+    //     this.setState({
+
+    //         redirect: !this.state.redirect
+    //     })
+    // }
+
+    // renderRedirect = (_path) => {
+    //     if (this.state.redirect) {
+    //         return <Redirect to= {`/employee/${_path}`  } />
+    //     }
+    // }
+
 };
