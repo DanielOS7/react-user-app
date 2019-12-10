@@ -18,7 +18,19 @@ const NavBar = (props) => {
                     </NavDropdown>
                 </Nav>
                 <NavItem className="ml-auto">
-                    <Button className="btn btn-primary" href="/login">Login</Button>
+                    {localStorage.getItem('loggedIn') === 'true' ?
+                        <span style={{ display: "inline-flex" }}>
+                            <p style={{ color: "white", marginRight: "15px", position: "relative", top: "8px" }}>
+                                Logged in as: {localStorage.getItem('username')} ({+localStorage.getItem('role') === 1 ? 'Admin' : 'User'})</p>
+                            <Button className="btn btn-danger" onClick={() => {
+                                localStorage.setItem('loggedIn', 'false');
+                                console.log(localStorage.getItem('loggedIn'));
+                                window.location.replace('http://localhost:3000/login');
+                            }}> Logout</Button>
+                        </span>
+                        :
+                        <Button className="btn btn-primary" href="/login">Login</Button>
+                    }
                 </NavItem>
             </Navbar.Collapse>
         </Navbar>
