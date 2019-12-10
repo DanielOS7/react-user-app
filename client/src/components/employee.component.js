@@ -109,15 +109,15 @@ export default class Employee extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <h1 className="m-2">Employee Page</h1>
+                                <h1 className="m-2" style={{position: "relative", right: "10px"}}>Employee Page</h1>
                                 {this.renderRedirect()}
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>
-                                            <th>Employee Number</th>
+                                            <th width="200px">Employee Number</th>
                                             <th>Name</th>
                                             <th>Address</th>
-                                            <th>Operation</th>
+                                            <th  width="200px">Operation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -183,14 +183,14 @@ export default class Employee extends React.Component {
                     <div>
                         <div className="container">
                             <div className="row">
-                                <div className="col-4">
-                                <h1 className="m-2">Employee Page</h1>
-                                <div className="col-10">
+                                <div className="col-8">
+                                <h1 className="m-2" style={{position: "relative", right: "10px"}}>Employee Page</h1>
                                      <Table striped bordered hover>
                                         <thead>
                                             <tr>
-                                                <th>Employee Number</th>
-                                                <th>Name</th>
+                                                <th width="200px">Employee Number</th>
+                                                <th width="200px">Name</th>
+                                                <th>Address</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -203,13 +203,15 @@ export default class Employee extends React.Component {
                                                         <td>
                                                             {data.name}
                                                         </td>
+                                                        <td>
+                                                            {data.address}
+                                                        </td>
 
                                                     </tr>
                                                 );
                                             })}
                                         </tbody>
                                     </Table>
-                                    </div>
                                 </div>
                             </div>
                         </div>

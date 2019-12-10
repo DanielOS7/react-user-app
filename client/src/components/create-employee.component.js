@@ -60,7 +60,7 @@ export default class CreateEmployee extends React.Component {
                 <div className="row">
                     <div className="col">
                         {this.renderRedirect()}
-                        <h1 className="m-2">Create Employee Page</h1>
+                        <h1 className="m-2" style={{position: "relative", right: "10px"}}>Create Employee Page</h1>
                         <div>
                             <Form onSubmit={this.onSubmit}>
                                 <Form.Group controlId="formName">

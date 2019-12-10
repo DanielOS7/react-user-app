@@ -12,7 +12,7 @@ export default class SideNavigation extends React.Component {
     render() {
         return (
             <SideNav
-                style={{ backgroundColor: "#343a40", color: "white", marginTop: "55px", position: "fixed" }}
+                style={{ backgroundColor: "#343a40", color: "white", top: "40px", position: "fixed" }}
                 onToggle={(toggled) => {
                     if (toggled === true) {
                         this.props.setConentPush("240px");
@@ -50,16 +50,16 @@ export default class SideNavigation extends React.Component {
                           </NavText>
                     </NavItem> */}
 
-                    <NavItem eventKey="create-user"
+                    <NavItem eventKey="employee"
                         onClick={() => {
-                            window.location.replace("http://localhost:3000/create-user");
+                            window.location.replace("http://localhost:3000/employee");
                         }}>
                         <NavIcon>
                             <FontAwesomeIcon icon={faUser} />
                         </NavIcon>
                         <NavText>
-                            Create User
-                          </NavText>
+                            Employees
+                        </NavText>
                     </NavItem>
 
                 </SideNav.Nav>

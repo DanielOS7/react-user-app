@@ -18,18 +18,35 @@ const NavBar = (props) => {
                     </NavDropdown>
                 </Nav>
                 <NavItem className="ml-auto">
-                    {localStorage.getItem('loggedIn') === 'true' ?
-                        <span style={{ display: "inline-flex" }}>
-                            <p style={{ color: "white", marginRight: "15px", position: "relative", top: "8px" }}>
-                                Logged in as: {localStorage.getItem('username')} ({+localStorage.getItem('role') === 1 ? 'Admin' : 'User'})</p>
-                            <Button className="btn btn-danger" onClick={() => {
-                                localStorage.setItem('loggedIn', 'false');
-                                console.log(localStorage.getItem('loggedIn'));
-                                window.location.replace('http://localhost:3000/login');
-                            }}> Logout</Button>
-                        </span>
-                        :
-                        <Button className="btn btn-primary" href="/login">Login</Button>
+                    <span style={{ display: "inline-flex" }}>
+                        {localStorage.getItem('loggedIn') === 'true'
+                            ? <p style={{ color: "white", marginRight: "15px", position: "relative", top: "8px" }}>
+                                Logged in as: {localStorage.getItem('username')} ({+localStorage.getItem('role') === 1 ? 'Admin' : 'User'})
+                                  </p>
+                            : null
+                        }
+
+                        <Button
+                            className={localStorage.getItem('loggedIn') === 'true'
+                                ? 'btn btn-danger'
+                                : 'btn btn-primary'
+                            }
+                            onClick={() => {
+                                if (localStorage.getItem('loggedIn') === 'true') {
+                                    localStorage.setItem('loggedIn', 'false');
+                                    window.location.replace('http://localhost:3000/login');
+                                }
+                                else {
+                                    window.location.replace('http://localhost:3000/login')
+                                }
+                            }
+                            }>
+                            {localStorage.getItem('loggedIn') === 'true'
+                                ? 'Logout'
+                                : 'Login'
+                            }
+                        </Button>
+                    </span>
                     }
                 </NavItem>
             </Navbar.Collapse>

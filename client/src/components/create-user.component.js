@@ -65,7 +65,7 @@ export default class CreateUser extends React.Component {
                 <div className="row">
                     <div className="col">
                         {this.renderRedirect()}
-                        <h1 className="m-2">Create User Page</h1>
+                        <h1 className="m-2" style={{position: "relative", right: "10px"}}>Create User Page</h1>
                         <div>
                             <Form onSubmit={this.onSubmit}>
                                 <Form.Group controlId="formUsername">
