@@ -14,7 +14,7 @@ export default class Home extends React.Component {
                             <center><div style={{ maxWidth: "40vw" }}>
                                 <hr />
                             </div></center>
-                            <a href="http://localhost:3000/create-user">Create User</a>
+                            <a href="http://localhost:3000/create-user">Create New User</a>
                         </div>
                     </div>
                 </div>
