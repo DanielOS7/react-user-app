@@ -5,7 +5,7 @@ import Login from './components/login.component';
 import CreateUser from './components/create-user.component';
 import Employee from './components/employee.component';
 import CreateEmployee from './components/create-employee.component';
-import { NavBar } from './components/navbar.component';
+import NavBar from './components/navbar.component';
 import SideNavigation from './components/sidenav.component';
 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';

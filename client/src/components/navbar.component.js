@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, NavItem } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 
-export const NavBar = (props) => {
+const NavBar = (props) => {
     return (
         <Navbar style={{ zIndex: "1007", position: "fixed", width: "100%" }} bg="dark" variant="dark" expand="lg">
             <Navbar.Brand href="http://localhost:3000">User Application</Navbar.Brand>
@@ -25,3 +25,5 @@ export const NavBar = (props) => {
 
     );
 };
+
+export default NavBar;
