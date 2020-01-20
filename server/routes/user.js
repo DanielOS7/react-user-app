@@ -1,21 +1,15 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
-var mySql = require('../dbconnection');
-var con = mySql();
-var bodyparser = require("body-parser");
-var cors = require('cors');
-
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded(({ extended: true })));
-app.use(cors());
+const express = require('express');
+const router = express.Router();
+const mySql = require('../dbconnection');
+const con = mySql();
 
 
-router.get('/', function (request, response) {
 
-    var sqlquery = `select * from users`;
+router.get('/', (request, response) => {
+
+  const sqlquery = `select * from test_users`;
   
-    con.query(sqlquery, function (error, data) {
+    con.query(sqlquery, (error, data) => {
       if (error) {
         console.log('Error executing query');
       }
@@ -30,17 +24,17 @@ router.get('/', function (request, response) {
   });
   
   
-  router.post('/', function (request, response) {
+  router.post('/', (request, response) => {
   
     console.log(request.body)
-    var username = request.body.username;
-    var password = request.body.password;
-    var name = request.body.name;
-    var role = request.body.role;
+    const username = request.body.username;
+    const password = request.body.password;
+    const name = request.body.name;
+    const role = request.body.role;
   
-    var sqlquery = `insert into users values('${username}', '${password}', '${name}', ${role == 'Admin' ? 1 : 2})`;
+    const sqlquery = `insert into test_users values('${username}', '${password}', '${name}', ${role == 'Admin' ? 1 : 2})`;
     console.log(sqlquery);
-    con.query(sqlquery, function (error, data) {
+    con.query(sqlquery, (error, data) => {
       if (error) {
         console.log('Error adding a new user');
       }
@@ -53,18 +47,18 @@ router.get('/', function (request, response) {
 
   
   // Not tested in postman as this was not a requirment for this project
-  router.put('/', function (request, response) {
+  router.put('/', (request, response) => {
   
     console.log(request.body)
-    var username = request.body.username;
-    var password = request.body.password;
-    var name = request.body.name;
-    var role = request.body.role;
+    const username = request.body.username;
+    const password = request.body.password;
+    const name = request.body.name;
+    const role = request.body.role;
   
-    var sqlquery = `UPDATE users SET username = ${username},
+    const sqlquery = `UPDATE test_users SET username = ${username},
      password = ${password}, name = ${name}, role = ${role == 'admin' ? 1 : 2}  WHERE username =  ${username}  `;
     console.log(sqlquery);
-    con.query(sqlquery, function (error, data) {
+    con.query(sqlquery, (error, data) => {
       if (error) {
         console.log('Error adding a new user');
       }

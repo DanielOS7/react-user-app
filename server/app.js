@@ -1,19 +1,19 @@
-var express = require("express");
-var app = express();
-var cookieparser = require("cookie-parser");
-var bodyparser = require("body-parser");
-var session = require("express-session");
-var cors = require('cors');
+const express = require("express");
+const app = express();
+const cookieparser = require("cookie-parser");
+const bodyparser = require("body-parser");
+const session = require("express-session");
+const cors = require('cors');
 
-var employee = require('./routes/employee');
-var user = require('./routes/user');
-var login = require('./routes/login');
+const employee = require('./routes/employee');
+const user = require('./routes/user');
+const login = require('./routes/login');
 
+app.use(cors());
 app.use(session({ secret: 'shh, secret!' }));
 app.use(cookieparser());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded(({ extended: true })));
-app.use(cors());
 
 app.use('/api/v1/employee', employee);
 app.use('/api/v1/user', user);

@@ -1,23 +1,16 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
-var mySql = require('../dbconnection');
-var con = mySql();
-var bodyparser = require("body-parser");
-var cors = require('cors');
-
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded(({ extended: true })));
-app.use(cors());
+const express = require('express');
+const router = express.Router();
+const mySql = require('../dbconnection');
+const con = mySql();
 
 
 
 
-    router.get('/', function(request, response) {
+    router.get('/', (request, response) => {
    
-    var sqlquery = `select * from employee`;
+    const sqlquery = `select * from test_employee`;
   
-    con.query(sqlquery, function (error, data) {
+    con.query(sqlquery, (error, data) => {
       if (error) {
         console.log('Error executing query');
       }
@@ -31,16 +24,16 @@ app.use(cors());
   
     });
   
-    router.post('/', function (request, response) {
+    router.post('/', (request, response) => {
     
       console.log(request.body);
       
-      var name = request.body.name;
-      var address = request.body.address;
+      const name = request.body.name;
+      const address = request.body.address;
     
-      var sqlquery = `insert into employee values(${null},'${name}', '${address}')`;
+      const sqlquery = `insert into test_employee values(${null},'${name}', '${address}')`;
       console.log(sqlquery);
-      con.query(sqlquery, function (error, data) {
+      con.query(sqlquery, (error, data) => {
         if (error) {
           console.log('Error adding a new Employee');
         }
@@ -53,42 +46,42 @@ app.use(cors());
   
   
   
-    router.delete('/', function (request, response) {
+    router.delete('/', (request, response) => {
     
       console.log(request.body)
-      var empno = request.body.empno;
+      const empno = request.body.empno;
     
-      var sqlquery = `DELETE FROM employee  WHERE empno =  ${empno}`;
+      const sqlquery = `DELETE FROM test_employee  WHERE empno =  ${empno}`;
       console.log(sqlquery);
-      con.query(sqlquery, function (error, data) {
+      con.query(sqlquery, (error, data) => {
         if (error) {
           console.log('Error deleting employe');
         }
         else {
-          console.log('Deleted employee');
+          console.log('Deleted test_employee');
         }
       });
       response.end();
     });
   
   
-    router.put('/', function (request, response) {
+    router.put('/', (request, response) => {
       
       console.log(request.body)
       
-      var empno = request.body.empno;
-      var name = request.body.name;
-      var address = request.body.address;
+      const empno = request.body.empno;
+      const name = request.body.name;
+      const address = request.body.address;
     
-      var sqlquery = `UPDATE employee SET name = '${name}', address = '${address}'  WHERE empno =  ${empno}`;
+      const sqlquery = `UPDATE test_employee SET name = '${name}', address = '${address}'  WHERE empno =  ${empno}`;
   
       console.log(sqlquery);
-      con.query(sqlquery, function (error, data) {
+      con.query(sqlquery, (error, data) => {
         if (error) {
-          console.log('Error updating employee');
+          console.log('Error updating test_employee');
         }
         else {
-          console.log('Updated employee');
+          console.log('Updated test_employee');
         }
       });
       response.end();
