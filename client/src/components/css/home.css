@@ -1,12 +1,3 @@
-.horizontal-row{
-    max-width: 40vw;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    left: 440px;
-    position: relative;
-}
-
 .page-links{
     font-size: x-large;
     text-align: center;
