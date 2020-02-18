@@ -1,0 +1,12 @@
+.page-links{
+    font-size: x-large;
+    text-align: center;
+    position: relative;
+    top: 30vh;
+    right: 3vw;
+
+}
+
+a {
+    text-decoration: none !important;
+}
